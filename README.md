@@ -92,4 +92,24 @@ You can get the updated guide [https://babeljs.io/docs/setup/#installation](http
     }
 ``` 
 
+### Adding eslint (pre-loaders)
+Following the instructional video pre-loaders and post-loaders are no longer in the spec. loaders is now rules and you use the `enforce` property to define `pre` and `post`.
+```js
+    module: {
+        rules: [
+            { 
+                enforce: 'pre',
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "jshint-loader"
+            },
+            { 
+                test: /\.es6$/, 
+                exclude: /node_modules/, 
+                loader: "babel-loader"
+            }
+        ]
+    },
+```
+
 

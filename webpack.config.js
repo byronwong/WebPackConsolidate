@@ -6,7 +6,13 @@ module.exports = {
     watch: true,
 
     module: {
-        loaders: [
+        rules: [
+            { 
+                enforce: 'pre',
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: "jshint-loader"
+            },
             { 
                 test: /\.es6$/, 
                 exclude: /node_modules/, 
