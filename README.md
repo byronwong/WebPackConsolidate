@@ -35,7 +35,7 @@ We can use the command `webpack --watch` or we can add it to the config file.
 
 ## Using webpack dev server
 Once installed we can run the command `webpack-dev-server --inline`
-`--inline` allows us to to keep watch command.
+`--inline` allows us to to keep watch command running on the dev server.
 
 
 ## Building with multiple files
@@ -93,7 +93,7 @@ You can get the updated guide [https://babeljs.io/docs/setup/#installation](http
 ``` 
 
 ### Adding eslint (pre-loaders)
-Following the instructional video pre-loaders and post-loaders are no longer in the spec. loaders is now rules and you use the `enforce` property to define `pre` and `post`.
+Following the instructional video in webpack V3 `pre-loaders` and `post-loaders` are no longer in the spec. loaders is now rules and you use the `enforce` property to define `pre` and `post`.
 ```js
     module: {
         rules: [
@@ -112,4 +112,22 @@ Following the instructional video pre-loaders and post-loaders are no longer in 
     },
 ```
 
+## Development vs Production
+When we go to production there are a few things we want done. We can run the development script using `webpack -p` - this will minify the code.
 
+Here we want to extent the existing config file, to do this we require the original config file.
+`webpack --config webpack-production.config.js -p`
+```js
+    var webPackStripLoader = require('strip-loader');
+    var devConfig = require('./webpack-config');
+
+    var stripLoader = { 
+        test: [/\.es6$/, /\.js$/ ],
+        exclude: /node_modules/, 
+        loader: webPackStripLoader.loader('console.log')
+    };
+
+    devConfig.module.rules.push(stripLoader); // added the object to the existing rules array in config
+
+    module.exports = devConfig;
+```
