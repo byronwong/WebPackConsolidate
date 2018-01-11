@@ -124,10 +124,27 @@ Here we want to extent the existing config file, to do this we require the origi
     var stripLoader = { 
         test: [/\.es6$/, /\.js$/ ],
         exclude: /node_modules/, 
-        loader: webPackStripLoader.loader('console.log')
+        loader: webPackStripLoader.loader('console.log', 'perfLog')
     };
 
     devConfig.module.rules.push(stripLoader); // added the object to the existing rules array in config
 
     module.exports = devConfig;
+```
+
+## Organising files and folders
+```js
+    context: path.resolve('js'), // set the relative root for our js files
+    entry: ['./util.js','./app.js'], // with the relative path now setup the paths are ./js/util.js
+    output: {
+        path: path.resolve('build/js/'), // tells webpack where to put the bundle.js file
+        publicPath: '/public/assets/js/', // tells the server where the bundle.js file will be served.
+        filename: './bundle.js'
+    },
+    watch: true, 
+
+    // dev server root folder
+    devServer: {
+        contentBase: 'public'
+    },
 ```

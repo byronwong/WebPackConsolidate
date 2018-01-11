@@ -1,9 +1,18 @@
+var path = require('path');
+
 module.exports = {
-    entry: ['./src/js/util.js','./src/js/app.js'],
+    context: path.resolve('js'),
+    entry: ['./util.js','./app.js'],
     output: {
-        filename: './dist/js/bundle.js'
+        path: path.resolve('build/js/'),
+        publicPath: '/public/assets/js/',
+        filename: './bundle.js'
     },
     watch: true,
+
+    devServer: {
+        contentBase: 'public'
+    },
 
     module: {
         rules: [
