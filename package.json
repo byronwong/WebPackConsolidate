@@ -1,0 +1,22 @@
+{
+  "name": "web-pack-consolidate",
+  "version": "1.0.0",
+  "description": "## Intro  Getting started: - `webpack ./entry.js bundle.js`",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "webpack-dev-server": "^2.10.1"
+  }
+}

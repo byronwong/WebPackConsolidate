@@ -1,0 +1,1 @@
+console.log('file02.js is here...');

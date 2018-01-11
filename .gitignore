@@ -1,0 +1,13 @@
+.DS_Store
+node_modules
+.tmp
+
+components/assets/img/*
+components/assets/sass/tools/bourbon/
+
+builds/
+builds/development/assets/img/*
+builds/production/assets/img/*
+
+
+.sass-cache/*
