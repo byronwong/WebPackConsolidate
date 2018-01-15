@@ -10,6 +10,8 @@ module.exports = {
     },
     watch: true,
 
+    plugins: [],
+
     devServer: {
         contentBase: 'public'
     },

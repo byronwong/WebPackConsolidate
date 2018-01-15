@@ -143,8 +143,78 @@ Here we want to extent the existing config file, to do this we require the origi
     },
     watch: true, 
 
-    // dev server root folder
+    // dev server root folder to serve files from
     devServer: {
         contentBase: 'public'
     },
 ```
+
+## Working with ES6 modules
+Here if we are working in ES6, we will need webpack to read the includes.
+
+Step 1:
+Replace the common JS modules with ES6
+```js 
+    var dep = require('dep');
+    // with 
+    import {} from './dep';
+```
+
+Step 2: 
+Rename files from `.js` to `.es6`
+
+Step 3:
+```js
+    // in webpack config
+    // remove the .js extension
+    entry: ['./util','./app'],
+
+    // also ensure your resolve is setup with .es6
+    resolve: {
+        extensions: ['.js', '.es6']
+    }
+```
+
+## Adding sourcemaps
+This is already built into webpack
+```js
+    // commands
+    webpack -d // source maps
+    webpack-dev-server -d -p // add source maps and minify the code
+```
+
+## Create multiple bundles
+This is useful for lazy loading. For instance if you have three different pages using three different js files. NOTE: webpack comes with basic util code which we don't want to repeat, so first we will have to extract that code out to be included on all pages.
+
+Step 1:
+Extract share webpack js code.
+```js
+
+    // In the webpack config:
+
+    var webpack require('webpack'); // will need to require it to get the code.
+    
+    // saves the shared js as shared.js
+    // this creates a plugin 
+    var commonPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js'); 
+
+    // 1: next we add the plugin in the config exports object
+    // 2: change entry to an object to specific js 
+    // 3: change filename in output to be a placeholder, name will come from the entry keys e.g. about or home.
+    // 4: change the html script tag to load the common js and page1.js
+    entry: {
+        about: './page1.js',
+        home: './page2.js'
+        },
+    output: {
+        path: path.resolve('build/js/'),
+        publicPath: '/public/assets/js/',
+        filename: './[name].js'
+    },
+    plugins: [commonPlugin], 
+
+
+```
+
+
+
