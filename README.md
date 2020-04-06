@@ -192,7 +192,7 @@ Extract share webpack js code.
 
     // In the webpack config:
 
-    var webpack require('webpack'); // will need to require it to get the code.
+    var webpack = require('webpack'); // will need to require it to get the code.
     
     // saves the shared js as shared.js
     // this creates a plugin 
@@ -214,6 +214,21 @@ Extract share webpack js code.
     plugins: [commonPlugin], 
 
 
+```
+
+## Using plugins (jquery)
+```js
+    // NOTE: you will need to require webpack 
+     var webpack = require('webpack');
+
+    // Allows jquery to be registered globally so that your js can access it. 
+    plugins: [
+        new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jquery' : 'jquery'
+        })
+    ]
 ```
 
 
